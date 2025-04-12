@@ -1,5 +1,5 @@
 #Ignore Files
-terraform*
+terraform.tfsta*
 
 .terraform/
 .terraform*
