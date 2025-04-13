@@ -87,6 +87,16 @@ resource "aws_security_group" "my-sg" {
   }
 }
 
+# HTTP Inbound
+# This rule allows HTTP traffic from any IPv4 address to the security group.
+resource "aws_vpc_security_group_ingress_rule" "inbound_http" {
+  security_group_id = aws_security_group.my-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 80
+  ip_protocol       = "tcp"
+  to_port           = 80
+}
+
 # HTTPS Inbound
 # This rule allows HTTPS traffic from any IPv4 address to the security group.
 resource "aws_vpc_security_group_ingress_rule" "inbound_https" {
@@ -121,6 +131,7 @@ resource "aws_instance" "my-ec2" {
   ami = "ami-0e35ddab05955cf57"
   instance_type = "t2.micro"
   subnet_id = aws_subnet.my-sub.id
+  key_name = "ubuntu"
   vpc_security_group_ids = [aws_security_group.my-sg.id]
   user_data = file("my-script.sh")
 
