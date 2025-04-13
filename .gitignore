@@ -3,3 +3,4 @@ terraform.tfsta*
 
 .terraform/
 .terraform*
+extra/

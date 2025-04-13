@@ -1,28 +1,3 @@
-terraform {
-
-  /* Uncomment this block to use Terraform Cloud for this tutorial
-  cloud {
-      organization = "organization-name"
-      workspaces {
-        name = "learn-terraform-*"
-      }
-  }
-  */
-
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-    random = {
-      source = "hashicorp/random"
-    }
-  }
-
-  required_version = ">= 1.11.4"
-}
-
 provider "aws" {
 region = "ap-south-1"
 }
@@ -121,7 +96,7 @@ resource "aws_instance" "my-ec2" {
 ami = "ami-0e35ddab05955cf57"
 instance_type = "t2.micro"
 subnet_id = aws_subnet.my-sub.id
-security_groups = [aws_security_group.my-sg.name]
+vpc_security_group_ids = [aws_security_group.my-sg.id]
 user_data = file("my-script.sh")
 
 tags={
