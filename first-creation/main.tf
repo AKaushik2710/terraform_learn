@@ -133,7 +133,7 @@ resource "aws_instance" "my-ec2" {
   subnet_id = aws_subnet.my-sub.id
   key_name = "ubuntu"
   vpc_security_group_ids = [aws_security_group.my-sg.id]
-  user_data = file("my-script.sh")
+  user_data = file("project.sh")
 
   tags={
     Name = random_pet.name.id
